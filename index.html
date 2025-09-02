@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Musician Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: url('background.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      text-align: center;
+      position: relative;
+      animation: moveBg 40s infinite alternate ease-in-out;
+    }
+    @keyframes moveBg {
+      0% { background-position: center center; }
+      50% { background-position: center top; }
+      100% { background-position: center center; }
+    }
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+      z-index: 0;
+    }
+    .socials {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 20px;
+      z-index: 2;
+    }
+    .socials a {
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 300;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .socials a:hover {
+      color: #fffa;
+      text-decoration: underline;
+    }
+    .bio-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 3;
+      text-align: left;
+    }
+    .bio-button {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+    .bio-content {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      background: rgba(0,0,0,0.8);
+      color: #fff;
+      margin-top: 10px;
+      border-radius: 6px;
+      transition: all 0.5s ease;
+      width: 300px;
+      font-size: 0.85rem;
+      line-height: 1.4;
+      padding: 0 20px;
+    }
+    .bio-content.open {
+      max-height: 600px;
+      opacity: 1;
+      padding: 20px;
+    }
+    .container {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      gap: 60px;
+    }
+    h1 {
+      font-weight: 500;
+      font-size: 4.5rem;
+      margin: 40px 0 5px 0;
+      letter-spacing: 6px;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards, pulse 6s ease-in-out infinite;
+    }
+    h3.alias {
+      font-weight: 300;
+      font-size: 1.5rem;
+      margin: 5px 0 20px 0;
+      letter-spacing: 3px;
+      opacity: 0;
+      animation: fadeIn 2s ease 0.8s forwards;
+    }
+    .underline {
+      width: 80px;
+      height: 2px;
+      background: #fff;
+      margin: 0 auto 40px auto;
+      opacity: 0;
+      animation: fadeIn 2s ease 1s forwards;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    h2 {
+      font-weight: 300;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+    .section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    .links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .link-box {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 20px 40px;
+      border-radius: 6px;
+      text-decoration: none;
+      color: #fff;
+      transition: all 0.3s ease;
+    }
+    .link-box:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-4px);
+    }
+  </style>
+</head>
+<body>
+  <div class="socials">
+    <a href="https://www.instagram.com/keaybt?igsh=c2ZsYmVlN3Rpajcz&utm_source=qr" target="_blank">Instagram</a>
+    <a href="https://open.spotify.com/artist/2HLvWnuUDbB4wNQaLLwbud?si=EmsvrbM_QZuXJghNBj2SfQ" target="_blank">Spotify</a>
+    <a href="https://youtu.be/_wu6YeHEfUM?si=k4PdV-dBraWgG_j4" target="_blank">YouTube</a>
+  </div>
+
+  <!-- Bio section in bottom-right -->
+  <div class="bio-container">
+    <div class="bio-button" onclick="toggleBio()" id="bioButton">About Me</div>
+    <div class="bio-content" id="bioContent">
+      <p>KBT is a Kyiv-based musician and producer who crafts atmospheric, multi-layered compositions, blending neo-soul, trip-hop, electro-house, and disco. His music moves between sensuality and rhythmic drive, spanning a wide range of tempos.</p>
+      <p>KBT’s performances are a living musical experience where melodies and arrangements intertwine with unexpected turns. Beyond electronic music, he plays guitar and keys, writes mostly in English, and always brings improvisation into his sets. At times, it feels as if he’s simply playing with sound, creating something new in the moment.</p>
+      <p>His music evokes a sense of lightness, like pleasant weather — perhaps sunny, but always filled with hope. Even the lyrical motifs resemble a cloud that eventually dissolves, letting the light through.</p>
+      <p>KBT is an experimenter exploring the edges of genres, creating music defined by its independence. It doesn’t follow the flow — it carves its own path: isolated, yet magnetic.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>KBT</h1>
+    <h3 class="alias">Keay</h3>
+    <div class="underline"></div>
+
+    <!-- Live Shows -->
+    <div class="section">
+      <h2>Live Shows</h2>
+      <div class="links">
+        <a href="https://www.youtube.com/watch?v=RraSbGnYZ10&ab_channel=themuddshow" class="link-box" target="_blank">The Mudd Show</a>
+        <a href="https://www.youtube.com/watch?v=NpLQT5fZx00&t=854s&ab_channel=ooseries" class="link-box" target="_blank">OO Series Performance</a>
+        <a href="https://www.youtube.com/watch?v=DLTJDu48x2k&ab_channel=KulturaZvuku" class="link-box" target="_blank">Kultura Zvuku Session</a>
+      </div>
+    </div>
+
+    <!-- Studio Works -->
+    <div class="section">
+      <h2>Studio Works</h2>
+      <div class="links">
+        <a href="https://open.spotify.com/album/5zZIX2DNs2XRpthIiPmqw9?si=A-ZMyzjiREqahvQvQHKVug" class="link-box" target="_blank">Errors (Album)</a>
+        <a href="https://open.spotify.com/album/2UUib8GQouJQOr7V4qLVqM?si=oKljU5C6RCyG-TY6AVLkGQ" class="link-box" target="_blank">Who You Are</a>
+        <a href="https://open.spotify.com/track/4TPmeRqxYMP5yBu2JZdwqJ?si=83135ba9a28f4058" class="link-box" target="_blank">As Long As We Can</a>
+      </div>
+    </div>
+
+    <!-- Commercial Projects -->
+    <div class="section">
+      <h2>Commercial Projects</h2>
+      <div class="links">
+        <a href="https://www.youtube.com/watch?v=c456AfQrjBM&list=PLONjM7r9iot4ofTzwL5zW9qD-KaG0uAWM&index=2&ab_channel=KBT" class="link-box" target="_blank">Intertop</a>
+        <a href="https://www.youtube.com/watch?v=HYO0mONU7VU&list=PLONjM7r9iot4ofTzwL5zW9qD-KaG0uAWM&index=5&ab_channel=KBT" class="link-box" target="_blank">Neant-3D</a>
+        <a href="https://www.youtube.com/watch?v=xws5Gxm-P6g&list=PLONjM7r9iot4ofTzwL5zW9qD-KaG0uAWM&index=3&ab_channel=KBT" class="link-box" target="_blank">Vladiyan</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleBio() {
+      const bio = document.getElementById('bioContent');
+      const button = document.getElementById('bioButton');
+      bio.classList.toggle('open');
+      if (bio.classList.contains('open')) {
+        button.textContent = 'Close';
+      } else {
+        button.textContent = 'About Me';
+      }
+    }
+  </script>
+</body>
+</html>
